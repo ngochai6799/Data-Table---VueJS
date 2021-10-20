@@ -13,19 +13,11 @@
               <th scope="col">Body</th>
             </tr>
           </thead>
-          <tbody>
-            <tr scope="row" v-for="user in userArray" v-bind:key="user.id">
-              <td>{{ user.userId }}</td>
-              <td>{{ user.id }}</td>
-              <td>{{ user.title }}</td>
-              <td>{{ user.body }}</td>
-            </tr>
-          </tbody>
-          <!-- <User
+          <User
             v-for="user in userArray"
             v-bind:key="user.id"
             v-bind:user="user"
-          ></User> -->
+          ></User>
         </table>
       </div>
     </div>
@@ -33,7 +25,7 @@
 </template>
 
 <script>
-// import User from "./User.vue";
+import User from "./User.vue";
 
 export default {
   name: "comp-table",
@@ -47,7 +39,10 @@ export default {
   },
   data() {
     return {};
-  }
+  },
+  components: {
+    User,
+  },
 };
 </script>
 
@@ -119,32 +114,5 @@ h2 {
 }
 thead tr th {
   white-space: nowrap;
-}
-.custom-table tbody th small,
-.custom-table tbody td small {
-  color: #b3b3b3;
-  font-weight: 300;
-}
-.custom-table tbody tr {
-  -webkit-transition: 0.3s all ease;
-  -o-transition: 0.3s all ease;
-  transition: 0.3s all ease;
-}
-.custom-table tbody tr:hover,
-.custom-table tbody tr:focus {
-  background: #fff;
-}
-.custom-table .td-box-wrap {
-  padding: 0;
-}
-.custom-table .box {
-  background: #fff;
-  border-radius: 4px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-.custom-table .box td,
-.custom-table .box th {
-  border: none !important;
 }
 </style>
