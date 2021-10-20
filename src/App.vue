@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <Home />
+    <router-link class="btn btn-primary m-2" :to="{ name: 'home' }"
+      >Bài tập 1</router-link
+    >
+    <router-link class="btn btn-primary m-2" to="/form">Bài tập 2</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Home from "./components/Home.vue";
-
 export default {
   name: "App",
-  components: {
-    Home,
-  },
 };
 </script>
 

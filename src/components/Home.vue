@@ -1,12 +1,12 @@
 <template>
-  <div class="app">
+  <div class="home">
     <Table :user-array="userArray" />
   </div>
 </template>
 
 <script>
 import Table from "./baitap1/Table.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Home",
@@ -23,9 +23,13 @@ export default {
   },
   created() {
     console.log("Life cycle created");
-    this.$store.dispatch("getDataFromApi");
+    this.getData();
   },
-  methods: {},
+  methods: {
+    ...mapActions({
+      getData: "getDataFromApi",
+    }),
+  },
 };
 </script>
 
