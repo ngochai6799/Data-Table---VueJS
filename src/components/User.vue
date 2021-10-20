@@ -27,11 +27,7 @@ export default {
 </script>
 
 <style>
-.custom-table thead tr,
-.custom-table thead th {
-  border-top: none;
-  border-bottom: none !important;
-}
+.custom-table tbody th,
 .custom-table tbody td {
   color: #777;
   font-weight: 300;

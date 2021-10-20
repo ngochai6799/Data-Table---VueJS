@@ -5,14 +5,7 @@
 
       <div class="table-responsive">
         <table class="table custom-table">
-          <thead>
-            <tr>
-              <th scope="col">User ID</th>
-              <th scope="col">ID</th>
-              <th scope="col">Title</th>
-              <th scope="col">Body</th>
-            </tr>
-          </thead>
+          <Header></Header>
           <User
             v-for="user in userArray"
             v-bind:key="user.id"
@@ -26,6 +19,7 @@
 
 <script>
 import User from "./User.vue";
+import Header from "./Header.vue";
 
 export default {
   name: "comp-table",
@@ -42,6 +36,7 @@ export default {
   },
   components: {
     User,
+    Header,
   },
 };
 </script>
@@ -97,22 +92,5 @@ h2 {
 
 .custom-table {
   min-width: 900px;
-}
-.custom-table thead tr,
-.custom-table thead th {
-  border-top: none;
-  border-bottom: none !important;
-}
-.custom-table tbody th,
-.custom-table tbody td {
-  color: #777;
-  font-weight: 300;
-  padding-bottom: 20px;
-  padding-top: 20px;
-  font-weight: 300;
-  border: none;
-}
-thead tr th {
-  white-space: nowrap;
 }
 </style>
