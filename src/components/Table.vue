@@ -21,6 +21,11 @@
               <td>{{ user.body }}</td>
             </tr>
           </tbody>
+          <!-- <User
+            v-for="user in userArray"
+            v-bind:key="user.id"
+            v-bind:user="user"
+          ></User> -->
         </table>
       </div>
     </div>
@@ -28,23 +33,21 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+// import User from "./User.vue";
 
 export default {
   name: "comp-table",
+  props: {
+    userArray: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
   data() {
     return {};
-  },
-  computed: {
-    ...mapGetters({
-      userArray: "userList",
-    }),
-  },
-  methods: {},
-  created() {
-    console.log("Life cycle created");
-    this.$store.dispatch("getDataFromApi");
-  },
+  }
 };
 </script>
 

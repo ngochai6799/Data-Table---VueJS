@@ -1,18 +1,32 @@
 <template>
   <div id="app">
-    <Table/>
+    <Table v-bind:userArray="userArray" />
   </div>
 </template>
 
 <script>
-import Table from './components/Table.vue'
+import Table from "./components/Table.vue";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Table
-  }
-}
+    Table,
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapGetters({
+      userArray: "userList",
+    }),
+  },
+  methods: {},
+  created() {
+    console.log("Life cycle created");
+    this.$store.dispatch("getDataFromApi");
+  },
+};
 </script>
 
 <style>
@@ -24,5 +38,4 @@ export default {
   color: #2c3e50;
   background-color: #efefef;
 }
-
 </style>
