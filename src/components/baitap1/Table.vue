@@ -1,16 +1,18 @@
 <template>
   <div class="content">
     <div class="container">
-      <h2 class="mb-5">Data Table</h2>
+      <h2 class="mb-5">
+        Data Table
+      </h2>
 
       <div class="table-responsive">
         <table class="table custom-table">
-          <Header></Header>
+          <Header />
           <User
             v-for="user in userArray"
-            v-bind:key="user.id"
-            v-bind:user="user"
-          ></User>
+            :key="user.id"
+            :user="user"
+          />
         </table>
       </div>
     </div>
@@ -22,7 +24,11 @@ import User from "./User.vue";
 import Header from "./Header.vue";
 
 export default {
-  name: "comp-table",
+  name: "CompTable",
+  components: {
+    User,
+    Header,
+  },
   props: {
     userArray: {
       type: Array,
@@ -33,10 +39,6 @@ export default {
   },
   data() {
     return {};
-  },
-  components: {
-    User,
-    Header,
   },
 };
 </script>

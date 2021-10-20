@@ -1,30 +1,16 @@
 <template>
   <div id="app">
-    <Table v-bind:userArray="userArray" />
+    <Home />
   </div>
 </template>
 
 <script>
-import Table from "./components/Table.vue";
-import { mapGetters } from "vuex";
+import Home from "./components/Home.vue";
 
 export default {
   name: "App",
   components: {
-    Table,
-  },
-  data() {
-    return {};
-  },
-  computed: {
-    ...mapGetters({
-      userArray: "userList",
-    }),
-  },
-  methods: {},
-  created() {
-    console.log("Life cycle created");
-    this.$store.dispatch("getDataFromApi");
+    Home,
   },
 };
 </script>

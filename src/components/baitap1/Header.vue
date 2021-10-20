@@ -1,16 +1,26 @@
 <template>
   <thead>
     <tr>
-      <th scope="col">User ID</th>
-      <th scope="col">ID</th>
-      <th scope="col">Title</th>
-      <th scope="col">Body</th>
+      <th scope="col">
+        User ID
+      </th>
+      <th scope="col">
+        ID
+      </th>
+      <th scope="col">
+        Title
+      </th>
+      <th scope="col">
+        Body
+      </th>
     </tr>
   </thead>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "CompHeader",
+};
 </script>
 
 <style>
