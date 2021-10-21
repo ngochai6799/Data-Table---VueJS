@@ -2,12 +2,18 @@
   <form class="step step3 mt-5 mb-3">
     <label for="where">From where did you here about us?</label>
     <br />
-    <select type="select" name="where">
+    <select
+      type="select"
+      name="where"
+    >
       <option value="friend">Friend</option>
       <option value="brochure">Brochure</option>
     </select>
     <br />
-    <input type="checkbox" name="term" />
+    <input
+      type="checkbox"
+      name="term"
+    />
     <label for="term">I accept terms & conditions</label>
     input
   </form>
