@@ -4,7 +4,7 @@
       >Bài tập 1</router-link
     >
     <router-link class="btn btn-primary m-2" to="/form">Bài tập 2</router-link>
-    <router-view></router-view>
+    <router-view />
   </div>
 </template>
 
@@ -16,9 +16,9 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
   text-align: center;
   color: #2c3e50;
   background-color: #ddd9c2;
