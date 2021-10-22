@@ -1,41 +1,24 @@
 <template>
   <div id="app">
-    <Table v-bind:userArray="userArray" />
+    <router-link class="btn btn-primary m-2" :to="{ name: 'home' }"
+      >Bài tập 1</router-link
+    >
+    <router-link class="btn btn-primary m-2" to="/form">Bài tập 2</router-link>
+    <router-view />
   </div>
 </template>
 
 <script>
-import Table from "./components/Table.vue";
-import { mapGetters } from "vuex";
-
 export default {
   name: "App",
-  components: {
-    Table,
-  },
-  data() {
-    return {};
-  },
-  computed: {
-    ...mapGetters({
-      userArray: "userList",
-    }),
-  },
-  methods: {},
-  created() {
-    console.log("Life cycle created");
-    this.$store.dispatch("getDataFromApi");
-  },
 };
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   background-color: #ddd9c2;
+  height: 100%;
 }
 </style>

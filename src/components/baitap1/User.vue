@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "comp-user",
+  name: "CompUser",
   props: {
     user: {
       type: Object,
