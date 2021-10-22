@@ -1,14 +1,14 @@
 <template>
   <form class="step step3 mt-5 mb-3">
-    <label for="where">From where did you here about us?</label>
+    <label for="information">From where did you here information about us?</label>
     <br />
-    <select type="select" name="where">
+    <select type="select" name="information">
       <option value="friend">Friend</option>
       <option value="brochure">Brochure</option>
     </select>
     <br />
     <input type="checkbox" name="term" />
-    <label for="term" class="">I accept terms & conditions</label>
+    <label for="term">I accept terms & conditions</label>
     <button class="d-block btn btn-primary m-auto" @click="resetStep">
       Reset
     </button>

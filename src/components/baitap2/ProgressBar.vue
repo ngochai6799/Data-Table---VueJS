@@ -3,19 +3,26 @@
     <div
       class="progress-bar"
       role="progressbar"
-      :style="{ width: progressBarWidth + '%' }"
-      :aria-valuenow="progressBarWidth"
-      aria-valuemin="33.33"
-      aria-valuemax="99.99"
+      :style="{ width: currentProgressBarWidth + '%' }"
+      :aria-valuenow="currentProgressBarWidth"
+      :aria-valuemin="progressBarWidthAtFirstStep"
+      aria-valuemax="100"
     />
   </div>
 </template>
 
 <script>
 export default {
-  name: "Step2",
+  name: "ProgressBar",
   props: {
-    progressBarWidth: Number,
+    progressBarWidthAtFirstStep: Number,
+    currentStep: Number,
+  },
+  computed: {
+    currentProgressBarWidth() {
+      let a = this.progressBarWidthAtFirstStep * this.currentStep;
+      return a;
+    },
   },
 };
 </script>

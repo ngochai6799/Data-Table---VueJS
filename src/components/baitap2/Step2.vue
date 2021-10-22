@@ -19,7 +19,7 @@
       >
         <div class="form-group">
           <label>Number of employees</label>
-          <input type="text" class="form-control" v-model="formData.employee" />
+          <input type="number" class="form-control" v-model="formData.employee" />
           <span>{{ errors[0] }}</span>
         </div>
       </ValidationProvider>

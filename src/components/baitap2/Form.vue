@@ -3,23 +3,20 @@
     <div class="content">
       <div class="container">
         <h2 class="mb-5">Form Validate</h2>
-        <ProgressBar :progress-bar-width="progressBarWidth" />
+        <ProgressBar
+          :progress-bar-width-at-first-step="progressBarWidthAtFirstStep"
+          :current-step="currentStep"
+        />
         <FormLabel :current-step="currentStep" />
-        <Step1
-          v-if="currentStep == 1"
-          :current-step="currentStep"
-          @nextStepEvent="nextStep"
-        />
-        <Step2
-          v-if="currentStep == 2"
-          :current-step="currentStep"
-          @nextStepEvent="nextStep"
-          @previousStepEvent="previousStep"
-        />
-        <Step3
-          v-if="currentStep == 3"
+        <Step
+          v-for="step in stepList"
+          :key="step.stepId"
+          :step="step"
+          :step-length="stepList.length"
           :current-step="currentStep"
           @resetStepEvent="resetStep"
+          @previousStepEvent="previousStep"
+          @nextStepEvent="nextStep"
         />
       </div>
     </div>
@@ -27,41 +24,102 @@
 </template>
 
 <script>
-import Step1 from "./Step1.vue";
-import Step2 from "./Step2.vue";
-import Step3 from "./Step3.vue";
 import ProgressBar from "./ProgressBar.vue";
 import FormLabel from "./FormLabel.vue";
+import Step from "./Step.vue";
 
 export default {
   name: "Form",
   components: {
-    Step1,
-    Step2,
-    Step3,
     ProgressBar,
     FormLabel,
+    Step,
   },
   data() {
     return {
       currentStep: 3,
-      progressBarWidth: 33.33,
+      stepList: [
+        {
+          stepId: 1,
+          listField: [
+            {
+              key: "name",
+              fieldName: "Full Name",
+              type: "text",
+              rules: "required|alpha",
+            },
+            {
+              key: "email",
+              fieldName: "Your Email",
+              type: "email",
+              rules: "required|email",
+            },
+          ],
+        },
+        {
+          stepId: 2,
+          listField: [
+            {
+              key: "company",
+              fieldName: "Your company name",
+              type: "text",
+              rules: "required",
+            },
+            {
+              key: "employee",
+              fieldName: "Number of employees",
+              type: "number",
+              rules: "required|numeric",
+            },
+          ],
+        },
+        {
+          stepId: 3,
+          listField: [
+            {
+              key: "information",
+              fieldName: "From where did you here information about us?",
+              type: "select",
+              rules: "",
+              optionList: [
+                {
+                  value: "friend",
+                  htmlContent: "Friend",
+                },
+                {
+                  value: "brochure",
+                  htmlContent: "Brochure",
+                },
+              ],
+            },
+            {
+              key: "term",
+              fieldName: "I accept terms & conditions",
+              type: "checkbox",
+              rules: "required",
+            },
+          ],
+        },
+      ],
     };
+  },
+  computed: {
+    progressBarWidthAtFirstStep() {
+      return 100 / this.stepList.length;
+    },
+  },
+  created() {
+    console.log(this.progressBarWidthAtFirstStep);
   },
   methods: {
     nextStep(data) {
       this.currentStep = data.currentStep + 1;
-      this.progressBarWidth = 33.33 * this.currentStep;
-      return this.currentStep;
     },
     previousStep(data) {
       this.currentStep = data.currentStep - 1;
-      this.progressBarWidth = 33.33 * this.currentStep;
-      return this.currentStep;
     },
     resetStep() {
       this.currentStep = 1;
-      this.progressBarWidth = 33.33;
     },
   },
 };
