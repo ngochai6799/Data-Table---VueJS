@@ -6,6 +6,11 @@ body {
   font-weight: 300;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 p {
   color: #b3b3b3;
   font-weight: 300;
@@ -98,4 +103,12 @@ form {
 
 .form-label-group .passed {
   border: 2px solid green;
+}
+
+.step input {
+  margin-left: auto;
+  margin-right: auto;
+}
+.step p {
+  color: rgb(224, 50, 50);
 }

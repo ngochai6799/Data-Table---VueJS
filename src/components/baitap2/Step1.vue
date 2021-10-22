@@ -1,82 +1,57 @@
 <template>
-  <form class="step step1 mt-5 mb-3">
-    <label for="name">Full name</label>
-    <input
-      v-validate="'required|alpha'"
-      class="d-block"
-      type="text"
-      name="name"
-      placeholder="Type your full name"
-    />
-    <!-- <p>{{ fields }}</p> -->
-    <p>{{ errors.first("name") }}</p>
-    <label for="email">Email</label>
-    <input
-      v-validate="'required|email'"
-      class="d-block"
-      type="email"
-      name="email"
-      placeholder="Type your email"
-    />
-    <p>{{ errors.first("email") }}</p>
-    <button type="submit" @click="processForm()">Button</button>
-  </form>
+  <ValidationObserver v-slot="{ handleSubmit }">
+    <form class="step step1 mt-5 mb-3" @submit.prevent="handleSubmit(onSubmit)">
+      <ValidationProvider
+        name="Name"
+        rules="required|alpha"
+        v-slot="{ errors }"
+      >
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control" v-model="formData.name" />
+          <span>{{ errors[0] }}</span>
+        </div>
+      </ValidationProvider>
+
+      <ValidationProvider
+        name="E-Mail"
+        rules="required|email"
+        v-slot="{ errors }"
+      >
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" v-model="formData.email" />
+          <span>{{ errors[0] }}</span>
+        </div>
+      </ValidationProvider>
+      <button type="submit" class="btn btn-primary m-2">Next</button>
+    </form>
+  </ValidationObserver>
 </template>
 
 <script>
-import Vue from "vue";
-import VeeValidate, { Validator, mapFields } from "vee-validate";
-const dictionary = {
-  en: {
-    messages: {
-      // alpha: () => "Your name must contain only alpabet letters!",
-    },
-  },
-};
-
-Validator.localize(dictionary);
-
-const validator = new Validator({ first_name: "alpha" });
-
-validator.localize("en");
-
-Vue.use(VeeValidate);
-
 export default {
   name: "Step1",
+  props: {
+    currentStep: Number,
+  },
   data() {
     return {
-      err: this.errors,
+      formData: {
+        name: "",
+        email: "",
+      },
     };
   },
-  // computed: {
-  //   computed: mapFields({
-  //     fullName: "name",
-  //     email: "email",
-  //   }),
-  // },
   methods: {
-    processForm() {
-      //attempt validating all
-      validator.validateAll().then((result) => {
-        if (result) {
-          //validation passed succesfully
-          console.log(result);
-          console.log(validator.errors.first("name"));
-          alert("Form validated succesfully");
-        }
-      });
+    onSubmit() {
+      let data = {
+        currentStep: this.currentStep,
+      };
+      this.$emit("nextStepEvent", data);
     },
   },
 };
 </script>
 
-<style scoped>
-.step input {
-  margin-left: auto;
-  margin-right: auto;
-}
-.step p {
-  color: rgb(224, 50, 50);
-}
-</style>
+<style scoped></style>

@@ -1,18 +1,11 @@
 <template>
   <div class="content">
     <div class="container">
-      <h2 class="mb-5">
-        Data Table
-      </h2>
-
+      <h2 class="mb-5 test">Data Table</h2>
       <div class="table-responsive">
         <table class="table custom-table">
           <Header />
-          <User
-            v-for="user in userArray"
-            :key="user.id"
-            :user="user"
-          />
+          <User v-for="user in userArray" :key="user.id" :user="user" />
         </table>
       </div>
     </div>
@@ -43,9 +36,12 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+$primary-color: rgb(235, 10, 10);
 .custom-table {
   min-width: 900px;
 }
+// .test {
+//   color: $primary-color;
+// }
 </style>
