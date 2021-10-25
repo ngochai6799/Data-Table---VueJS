@@ -50,10 +50,17 @@ export default {
     width: 16px;
     height: 16px;
   }
+  input:checked {
+    background-color: #45d1c9;
+    border-color: #45d1c9;
+  }
   .form-check-label {
     display: block;
     width: 100%;
     text-align: left;
+    // vertical-align: middle;
+    // height: 100%;
+    line-height: 40px;
   }
 }
 .form-check:hover {

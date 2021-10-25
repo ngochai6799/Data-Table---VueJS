@@ -28,6 +28,13 @@
           </div>
         </div>
       </div>
+      <div class="show-province">
+        <ProvinceSelected
+          v-for="p in provinceSelectedArray"
+          :key="p.code"
+          :p="p"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -35,6 +42,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import Option from "./Option.vue";
+import ProvinceSelected from "./ProvinceSelected.vue";
 
 window.onclick = function (event) {
   if (
@@ -58,11 +66,13 @@ export default {
   name: "Select",
   components: {
     Option,
+    ProvinceSelected,
   },
   data() {
     return {
       provinceChosenArray: [],
       isButtonDisable: true,
+      provinceSelectedArray: [],
     };
   },
   watch: {
@@ -76,6 +86,10 @@ export default {
     ...mapGetters({
       provinceArray: "provinceList",
     }),
+    // provinceSelectedArray() {
+    //   let a = this.provinceArray.slice(0, 3);
+    //   return a;
+    // },
   },
   created() {
     this.getData();
@@ -98,6 +112,7 @@ export default {
     },
     handleBtnYesClick() {
       console.log(this.provinceChosenArray);
+      this.provinceSelectedArray = this.provinceChosenArray;
     },
   },
 };
@@ -182,5 +197,20 @@ export default {
 
 .show {
   display: block;
+}
+
+.show-province {
+  margin-top: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  width: 480px;
+  height: 48px;
+  background: #ffffff;
+  border: 1px solid #999999;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 8px 0px;
+  display: flex;
 }
 </style>

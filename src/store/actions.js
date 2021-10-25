@@ -22,6 +22,7 @@ export default {
       );
       if (result.status == 200) {
         commit("fetchProvinceListIntoState", result.data);
+        // console.log(result.data);
       } else {
         console.log(result.data.error);
       }
