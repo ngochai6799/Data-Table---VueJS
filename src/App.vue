@@ -4,6 +4,9 @@
       >Bài tập 1</router-link
     >
     <router-link class="btn btn-primary m-2" to="/form">Bài tập 2</router-link>
+    <router-link class="btn btn-primary m-2" to="/select"
+      >Bài tập 3</router-link
+    >
     <router-view />
   </div>
 </template>

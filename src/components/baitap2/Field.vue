@@ -1,8 +1,12 @@
 <template>
-  <ValidationProvider :name="field.key" :rules="field.rules" v-slot="{ errors }">
-    <div class="form-group">
-      <label>{{ field.fieldName }}</label>
-      <input :type="field.type" class="form-control" v-model="formData" />
+  <ValidationProvider
+    :name="field.key"
+    :rules="field.rules"
+    v-slot="{ errors }"
+  >
+    <div :class="field.classDiv">
+      <label :class="field.classLabel">{{ field.fieldName }}</label>
+      <input :type="field.type" :class="field.classInput" v-model="formData" />
       <span>{{ errors[0] }}</span>
     </div>
   </ValidationProvider>
@@ -19,7 +23,17 @@ export default {
       formData: "",
     };
   },
+  
 };
 </script>
 
-<style></style>
+<style script>
+.form-check {
+  display: flex !important;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+.step input[type="checkbox"] {
+  margin-right: 5px;
+}
+</style>

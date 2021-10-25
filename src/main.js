@@ -4,7 +4,7 @@ import Vuex from "vuex";
 import store from "./store";
 import router from "./router";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
-import "../src/assets/style/index.css";
+import "./assets/style/index.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
