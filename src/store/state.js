@@ -1,5 +1,5 @@
 export default {
   userArray: [],
   provinceArray: [],
-  provinceSavedArray: []
+  provinceSavedArray: [1],
 };

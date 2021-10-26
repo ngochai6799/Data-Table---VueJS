@@ -7,8 +7,8 @@
     <div id="myDropdown" class="dropdown-content">
       <div class="dropdown-list">
         <Option
-          v-for="province in provinceArrayClone"
-          :key="province.code"
+          v-for="(province, index) in provinceArrayClone"
+          :key="index"
           :province="province"
           @checkboxChange="handleCheckboxChange"
         />
@@ -58,23 +58,14 @@ export default {
     return {
       isButtonDisable: true,
       provinceCheckedArray: [],
+      provinceArrayClone: [],
     };
-  },
-  created() {
-    this.getData();
   },
   computed: {
     ...mapGetters({
-      provinceArray: "provinceList",
+      provinceArray: "provinceArray",
       provinceSavedArray: "provinceSavedArray",
     }),
-    provinceArrayClone() {
-      let arr = this.provinceArray.map((a) =>
-        Object.assign({ checked: false }, a)
-      );
-      arr.filter((item) => item.checked);
-      return arr;
-    },
   },
   watch: {
     provinceCheckedArray: function () {
@@ -82,36 +73,48 @@ export default {
         this.isButtonDisable = false;
       } else this.isButtonDisable = true;
     },
+    provinceArray(val) {
+      let cities = JSON.parse(JSON.stringify(val));
+      this.provinceArrayClone = cities.map((item) => {
+        if (this.provinceSavedArray.includes(item.code)) {
+          item.checked = true;
+        } else {
+          item.checked = false;
+        }
+        return item;
+      });
+    },
   },
+
   methods: {
-    ...mapActions({
-      getData: "getProvinceListFromApi",
-    }),
     toggleOptionList() {
       document.getElementById("myDropdown").classList.toggle("show");
       document.getElementsByClassName("dropbtn")[0].classList.toggle("focus");
     },
     handleCheckboxChange(data) {
       if (data.checked == true) {
-        this.provinceCheckedArray.push(data);
+        this.provinceCheckedArray.push(datval);
       } else {
         let index = this.provinceCheckedArray.indexOf(data);
         this.provinceCheckedArray.splice(index, 1);
       }
     },
     handleBtnYesClick() {
-      const arr = this.provinceCheckedArray.map((b) => Object.assign({}, b));
+      const arr = this.provinceArrayClone
+        .filter((item) => item.checked)
+        .map((checkedCity) => checkedCity.code);
       this.$store.dispatch("saveProvinceAction", arr);
     },
     handleBtnCancelClick() {
-      console.log("cancel");
-      const arr = this.provinceSavedArray.map((a) =>
-        Object.assign({ checked: false }, a)
-      );
-
-      this.provinceCheckedArray = arr;
-      console.log(arr);
-      // this.$store.dispatch("cancel", obj2);
+      let cities = JSON.parse(JSON.stringify(this.provinceArray));
+      this.provinceArrayClone = cities.map((item) => {
+        if (this.provinceSavedArray.includes(item.code)) {
+          item.checked = true;
+        } else {
+          item.checked = false;
+        }
+        return item;
+      });
     },
   },
 };

@@ -5,7 +5,7 @@
       <Dropdown />
       <div class="show-province">
         <ProvinceSelected
-          v-for="p in provinceSavedArray"
+          v-for="p in provinceSavedArrayHandle"
           :key="p.code"
           :p="p"
         />
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import ProvinceSelected from "./ProvinceSelected.vue";
 import Dropdown from "./Dropdown.vue";
 
@@ -28,10 +28,22 @@ export default {
   data() {
     return {};
   },
-  computed: {
-    ...mapGetters({
-      provinceSavedArray: "provinceSavedArray",
+  methods: {
+    ...mapActions({
+      getData: "getProvinceListFromApi",
     }),
+  },
+  async created() {
+    await this.getData();
+  },
+  computed: {
+    ...mapGetters(["provinceSavedArray", "provinceArray"]),
+    provinceSavedArrayHandle() {
+      console.log(this.$store);
+      return this.provinceArray.filter((province) =>
+        this.provinceSavedArray.includes(province.code)
+      );
+    },
   },
 };
 </script>

@@ -2,7 +2,7 @@ export default {
   userList: (state) => {
     return state.userArray;
   },
-  provinceList: (state) => {
+  provinceArray: (state) => {
     return state.provinceArray;
   },
   provinceSavedArray: (state) => {

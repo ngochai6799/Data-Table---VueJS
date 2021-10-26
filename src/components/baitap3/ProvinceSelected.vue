@@ -21,9 +21,6 @@ export default {
       return this.p.name;
     },
   },
-  created() {
-    console.log(this.provinceName);
-  },
 };
 </script>
 
