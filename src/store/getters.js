@@ -5,4 +5,7 @@ export default {
   provinceList: (state) => {
     return state.provinceArray;
   },
+  provinceSavedArray: (state) => {
+    return state.provinceSavedArray;
+  },
 };

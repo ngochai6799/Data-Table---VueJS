@@ -30,4 +30,8 @@ export default {
       console.log(error);
     }
   },
+  saveProvinceAction({ commit }, arr) {
+    console.log(arr);
+    commit("mutateProvinceSavedList", arr);
+  },
 };

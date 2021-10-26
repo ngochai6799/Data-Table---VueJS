@@ -1,18 +1,15 @@
 <template>
   <div class="province-wrapper">
-    <p>{{ provinceName }}</p>
-    <img src="../../assets/images/close.svg" alt="" />
+    <span>{{ provinceName }}</span>
+    <img src="../../assets/images/close.svg" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "province-selected",
+  name: "ProvinceSelected",
   props: {
     p: Object,
-  },
-  created() {
-    console.log(this.provinceName);
   },
   computed: {
     provinceName() {
@@ -24,6 +21,9 @@ export default {
       return this.p.name;
     },
   },
+  created() {
+    console.log(this.provinceName);
+  },
 };
 </script>
 
@@ -33,12 +33,11 @@ export default {
   background-color: #f8f8f8;
   min-width: 134px;
   width: fit-content;
-  margin: 0 13px;
+  margin: 2px 13px;
   position: relative;
-  flex-wrap: wrap;
-  p {
+  border-radius: 32px;
+  span {
     color: #333333;
-    margin-bottom: 0;
     line-height: 30px;
     padding-right: 10px;
   }

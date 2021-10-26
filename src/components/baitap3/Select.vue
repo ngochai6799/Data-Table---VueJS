@@ -2,35 +2,10 @@
   <div class="content">
     <div class="container">
       <h2 class="mb-5">Select Province</h2>
-      <div class="dropdown">
-        <div @click.stop="toggleOptionList" class="dropbtn">
-          <span>Chọn tỉnh thành</span>
-          <img src="../../assets/images/arrow.svg" />
-        </div>
-        <div id="myDropdown" class="dropdown-content">
-          <div class="dropdown-list">
-            <Option
-              v-for="province in provinceArray"
-              :key="province.code"
-              :province="province"
-              @checkboxChangeEvent="handleCheckboxChange"
-            />
-          </div>
-          <div class="button-group">
-            <button
-              class="btn-yes"
-              :disable="isButtonDisable"
-              @click="handleBtnYesClick"
-            >
-              Đồng Ý
-            </button>
-            <button class="btn-cancel">Hủy</button>
-          </div>
-        </div>
-      </div>
+      <Dropdown />
       <div class="show-province">
         <ProvinceSelected
-          v-for="p in provinceSelectedArray"
+          v-for="p in provinceSavedArray"
           :key="p.code"
           :p="p"
         />
@@ -40,80 +15,23 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import Option from "./Option.vue";
+import { mapGetters } from "vuex";
 import ProvinceSelected from "./ProvinceSelected.vue";
-
-window.onclick = function (event) {
-  if (
-    !event.target.matches(".form-check-label") &&
-    !event.target.matches(".form-check-input") &&
-    !event.target.matches(".form-check")
-  ) {
-    let dropdownContent =
-      document.getElementsByClassName("dropdown-content")[0];
-    if (dropdownContent.classList.contains("show")) {
-      dropdownContent.classList.remove("show");
-    }
-    let focusedElement = document.getElementsByClassName("dropbtn")[0];
-    if (focusedElement.classList.contains("focus")) {
-      focusedElement.classList.remove("focus");
-    }
-  }
-};
+import Dropdown from "./Dropdown.vue";
 
 export default {
   name: "Select",
   components: {
-    Option,
     ProvinceSelected,
+    Dropdown,
   },
   data() {
-    return {
-      provinceChosenArray: [],
-      isButtonDisable: true,
-      provinceSelectedArray: [],
-    };
-  },
-  watch: {
-    provinceChosenArray: function () {
-      if (this.provinceChosenArray.length > 0) {
-        this.isButtonDisable = false;
-      } else this.isButtonDisable = true;
-    },
+    return {};
   },
   computed: {
     ...mapGetters({
-      provinceArray: "provinceList",
+      provinceSavedArray: "provinceSavedArray",
     }),
-    // provinceSelectedArray() {
-    //   let a = this.provinceArray.slice(0, 3);
-    //   return a;
-    // },
-  },
-  created() {
-    this.getData();
-  },
-  methods: {
-    ...mapActions({
-      getData: "getProvinceListFromApi",
-    }),
-    toggleOptionList() {
-      document.getElementById("myDropdown").classList.toggle("show");
-      document.getElementsByClassName("dropbtn")[0].classList.toggle("focus");
-    },
-    handleCheckboxChange(data) {
-      if (data.checked == true) {
-        this.provinceChosenArray.push(data.province);
-      } else {
-        let index = this.provinceChosenArray.indexOf(data.province);
-        this.provinceChosenArray.splice(index, 1);
-      }
-    },
-    handleBtnYesClick() {
-      console.log(this.provinceChosenArray);
-      this.provinceSelectedArray = this.provinceChosenArray;
-    },
   },
 };
 </script>
@@ -205,12 +123,13 @@ export default {
   margin-right: auto;
   position: relative;
   width: 480px;
-  height: 48px;
+  min-height: 48px;
   background: #ffffff;
   border: 1px solid #999999;
   border-radius: 4px;
   box-sizing: border-box;
   padding: 8px 0px;
   display: flex;
+  flex-wrap: wrap;
 }
 </style>

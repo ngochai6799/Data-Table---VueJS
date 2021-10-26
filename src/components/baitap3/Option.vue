@@ -1,11 +1,11 @@
 <template>
   <div class="form-check">
     <input
+      :id="province.codename"
+      @change="handleChange"
       type="checkbox"
       class="form-check-input"
-      :id="province.codename"
-      v-model="checked"
-      @change="handleChange()"
+      :checked="province.checked"
     />
     <label class="form-check-label" :for="province.codename">{{
       province.name
@@ -19,18 +19,10 @@ export default {
   props: {
     province: Object,
   },
-  data() {
-    return {
-      checked: false,
-    };
-  },
   methods: {
     handleChange() {
-      let data = {
-        province: this.province,
-        checked: this.checked,
-      };
-      this.$emit("checkboxChangeEvent", data);
+      this.province.checked = !this.province.checked;
+      this.$emit("checkboxChange", this.province);
     },
   },
 };
@@ -58,8 +50,6 @@ export default {
     display: block;
     width: 100%;
     text-align: left;
-    // vertical-align: middle;
-    // height: 100%;
     line-height: 40px;
   }
 }
